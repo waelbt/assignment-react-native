@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useProduct = () => {
-	const [products, setProducts] = useState([]);
+	const [products, setFilteredProducts] = useState([]);
 	const [error, setError] = useState(false);
 
 	useEffect(() => {
@@ -12,7 +12,7 @@ const useProduct = () => {
 					"https://28a6-51-140-66-210.ngrok-free.app/products"
 				);
 				const data = await reponse.json();
-				setProducts(data);
+				setFilteredProducts(data);
 			} catch (error) {
 				console.log(error.message);
 				setError(true);
@@ -22,7 +22,7 @@ const useProduct = () => {
 		fetchData();
 	}, []);
 
-	return { products, error };
+	return { products, error, setFilteredProducts };
 };
 
 export default useProduct;

@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, SafeAreaView } from "react-native";
 import { SearchBar, ProductList, ProductItem } from "./app/components";
 import { useState, createContext } from "react";
 import DataContext from "./app/context";
@@ -8,9 +8,9 @@ export default function App() {
 	const [data, setData] = useState([]);
 	return (
 		<DataContext.Provider value={[data, setData]}>
-			<View style={styles.container}>
+			<SafeAreaView style={styles.container}>
 				<ProductList />
-			</View>
+			</SafeAreaView>
 		</DataContext.Provider>
 	);
 }
@@ -18,7 +18,7 @@ export default function App() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "#fff",
+		backgroundColor: "#000",
 		alignItems: "center",
 		justifyContent: "center",
 	},
