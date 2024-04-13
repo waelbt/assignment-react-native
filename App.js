@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { FlatList, StyleSheet, Text, SafeAreaView } from "react-native";
-import { SearchBar, ProductList, ProductItem } from "./app/components";
+import { ProductList, ProductItem } from "./app/components";
 import { useState, createContext } from "react";
 import DataContext from "./app/context";
 

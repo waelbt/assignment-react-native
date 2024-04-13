@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
 	FlatList,
 	StyleSheet,
@@ -11,17 +11,25 @@ import { useProduct } from "../hooks";
 import DataContext from "../context";
 
 const ProductList = () => {
-	const { products, error, setFilteredProducts } = useProduct();
+	const { products, error } = useProduct();
+	const [filterProducts, setFilteredProducts] = useState();
 	const { setData } = useContext(DataContext);
 	const [searchQuery, setSearchQuery] = useState("");
 
 	const handleSearch = () => {
-		const filtered = products.filter((product) =>
-			product?.product_name.toLowerCase().includes(searchQuery.toLowerCase())
-		);
-
-		setFilteredProducts(filtered);
+		if (searchQuery.trim() === "") {
+			setFilteredProducts(products);
+		} else {
+			const filtered = products.filter((product) =>
+				product?.product_name.toLowerCase().includes(searchQuery.toLowerCase())
+			);
+			setFilteredProducts(filtered);
+		}
 	};
+
+	useEffect(() => {
+		setFilteredProducts(products);
+	}, [products]);
 	if (error) {
 		return (
 			<View style={styles.centered}>
@@ -49,7 +57,7 @@ const ProductList = () => {
 
 			<FlatList
 				style={styles.listContainer}
-				data={products}
+				data={filterProducts}
 				numColumns={3}
 				keyExtractor={(item) => item.id.toString()} // Assuming 'id' is a number, it needs to be converted to a string
 				renderItem={({ item }) => (
