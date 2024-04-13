@@ -23,12 +23,18 @@ const ProductList = () => {
 
 	return (
 		<FlatList
+			style={styles.listContainer}
 			data={products}
+			numColumns={3}
 			keyExtractor={(item) => item.id.toString()} // Assuming 'id' is a number, it needs to be converted to a string
 			renderItem={({ item }) => (
-				<TouchableOpacity onPress={() => setData(item)}>
-					<View style={styles.itemContainer}>
-						<Text style={styles.name}>{item.product_name}</Text>
+				<TouchableOpacity
+					style={styles.container}
+					onPress={() => setData(item)}
+				>
+					<View style={styles.coloredSideView} />
+					<View style={styles.textsContainer}>
+						<Text style={styles.title}>{item.product_name}</Text>
 						<Text style={styles.price}>{item.price} Dhs</Text>
 					</View>
 				</TouchableOpacity>
@@ -40,22 +46,34 @@ const ProductList = () => {
 export default ProductList;
 
 const styles = StyleSheet.create({
-	centered: {
+	listContainer: {
 		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
+		width: "100%",
 	},
-	itemContainer: {
+	container: {
+		flex: 1,
+		flexDirection: "row",
+		backgroundColor: "#333",
+		borderRadius: 5,
+		margin: 5,
+		overflow: "hidden",
+	},
+	coloredSideView: {
+		backgroundColor: "pink",
+		width: 5,
+	},
+	textsContainer: {
+		flex: 1,
 		padding: 10,
-		borderBottomWidth: 1,
-		borderBottomColor: "#cccccc",
 	},
-	name: {
-		fontSize: 16,
+	title: {
+		color: "#fff",
+		fontSize: 18,
 		fontWeight: "bold",
+		marginBottom: 5,
 	},
 	price: {
+		color: "#fff",
 		fontSize: 14,
-		color: "#666666",
 	},
 });
