@@ -13,8 +13,8 @@ import DataContext from "../context";
 const ProductList = () => {
 	const { products, error } = useProduct();
 	const [filterProducts, setFilteredProducts] = useState();
-	const { setData } = useContext(DataContext);
 	const [searchQuery, setSearchQuery] = useState("");
+	const { addItem } = useContext(DataContext);
 
 	const handleSearch = () => {
 		if (searchQuery.trim() === "") {
@@ -63,7 +63,7 @@ const ProductList = () => {
 				renderItem={({ item }) => (
 					<TouchableOpacity
 						style={styles.container}
-						onPress={() => setData(item)}
+						onPress={() => addItem(item)}
 					>
 						<View style={styles.coloredSideView} />
 						<View style={styles.textsContainer}>

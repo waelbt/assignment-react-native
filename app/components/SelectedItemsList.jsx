@@ -1,4 +1,4 @@
-import React from "react";
+import { useContext } from "react";
 import {
 	View,
 	Text,
@@ -6,28 +6,12 @@ import {
 	TouchableOpacity,
 	StyleSheet,
 } from "react-native";
+import DataContext from "../context";
+import ProductItem from "./ProductItem";
 
-// Example of a selected item component
-const SelectedItem = ({ item, onIncrease, onDecrease }) => {
-	return (
-		<View style={styles.selectedItemContainer}>
-			<Text style={styles.itemTitle}>{item.title}</Text>
-			<View style={styles.quantityContainer}>
-				<TouchableOpacity onPress={onDecrease}>
-					<Text style={styles.quantityButton}>-</Text>
-				</TouchableOpacity>
-				<Text style={styles.quantity}>{item.quantity}</Text>
-				<TouchableOpacity onPress={onIncrease}>
-					<Text style={styles.quantityButton}>+</Text>
-				</TouchableOpacity>
-			</View>
-			<Text style={styles.price}>{item.price} Dhs</Text>
-		</View>
-	);
-};
+const SelectedItemsList = () => {
+	const { data } = useContext(DataContext);
 
-const SelectedItemsList = ({ selectedItems }) => {
-	// Implement increase and decrease quantity logic here
 	const increaseQuantity = (id) => {
 		// TODO
 	};
@@ -39,10 +23,10 @@ const SelectedItemsList = ({ selectedItems }) => {
 	return (
 		<FlatList
 			horizontal
-			data={selectedItems}
+			data={data}
 			keyExtractor={(item) => item.id.toString()}
 			renderItem={({ item }) => (
-				<SelectedItem
+				<ProductItem
 					item={item}
 					onIncrease={() => increaseQuantity(item.id)}
 					onDecrease={() => decreaseQuantity(item.id)}
@@ -55,12 +39,17 @@ const SelectedItemsList = ({ selectedItems }) => {
 
 const styles = StyleSheet.create({
 	selectedItemsList: {
+		width: "100%",
+		borderWidth: 2,
+		borderColor: "#fff", // The color can be a hex code, an rgba value, etc.
+		borderRadius: 5,
+		borderStyle: "solid",
 		// Style for the horizontal list
 	},
 	selectedItemContainer: {
 		flexDirection: "row",
 		alignItems: "center",
-		backgroundColor: "#222", // Assuming a dark theme
+		backgroundColor: "#00000", // Assuming a dark theme
 		borderRadius: 5,
 		padding: 10,
 		marginRight: 10,
@@ -88,7 +77,6 @@ const styles = StyleSheet.create({
 		color: "#fff",
 		fontSize: 16,
 	},
-	// ... other styles ...
 });
 
 export default SelectedItemsList;
