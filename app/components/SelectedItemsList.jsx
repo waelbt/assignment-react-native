@@ -24,6 +24,7 @@ const SelectedItemsList = () => {
 
 const styles = StyleSheet.create({
 	selectedItemsList: {
+		flex: 1,
 		width: "100%",
 		borderWidth: 2,
 		borderColor: "#fff",

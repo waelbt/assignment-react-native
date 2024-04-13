@@ -15,7 +15,7 @@ const ProductItem = ({ item }) => {
 	return (
 		<View style={styles.selectedItemContainer}>
 			<View style={styles.itemDetails}>
-				<Text style={styles.itemName}>{item.title || "Double Espresso"}</Text>
+				<Text style={styles.itemName}>{item.product_name}</Text>
 				<Text style={styles.itemPrice}>{`1 x ${
 					item.price || "24"
 				} Dhs / u`}</Text>
